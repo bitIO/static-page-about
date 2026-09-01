@@ -199,7 +199,7 @@
     border-radius: 999px; padding: 13px 26px;
     border: 1px solid transparent;
     cursor: pointer;
-    transition: transform 0.15s var(--ease), background 0.2s, border-color 0.2s;
+    transition: transform 0.15s var(--ease), background 0.2s, border-color 0.2s, box-shadow 0.25s;
     white-space: nowrap;
   }
   .btn:active { transform: scale(0.97); }
@@ -208,9 +208,18 @@
   .btn-ghost { border-color: var(--line-2); color: var(--text); background: transparent; }
   .btn-ghost:hover { border-color: var(--accent-line); color: var(--accent); }
 
+  .contact .btn-primary {
+    box-shadow: 0 0 0 1px var(--accent-soft), 0 0 22px -6px rgba(52, 211, 153, 0.45);
+  }
+  .contact .btn-primary:hover {
+    box-shadow: 0 0 0 1px var(--accent-line), 0 0 34px -4px rgba(52, 211, 153, 0.65);
+    transform: translateY(-1px);
+  }
+
   @media (max-width: 767px) {
     .hero-ctas { flex-direction: column; align-items: stretch; }
-    .hero-ctas .btn { width: 100%; justify-content: center; }
+    .hero-ctas .btn,
+    .contact .btn-primary { width: 100%; justify-content: center; }
   }
 
   .hero-card {
