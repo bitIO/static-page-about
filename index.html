@@ -477,6 +477,10 @@
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] { opacity: 1; transform: none; }
   }
+  @media (max-width: 767px) {
+    [data-reveal].hero-card { transform: translateX(64px); }
+    [data-reveal].hero-card.in { transform: translateX(0); }
+  }
 </style>
 </head>
 <body>
