@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francisco Calle Moreno · Software Architect & AI Engineer</title>
+<meta name="description" content="Francisco Calle Moreno — software architect and AI engineer. Cloud-native platforms, AI-driven products, clean architecture, and full-stack development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230F172A'/%3E%3Crect x='2' y='2' width='60' height='60' fill='none' stroke='%2322C55E' stroke-width='2'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='28' font-weight='700' text-anchor='middle' fill='%2322C55E'%3EFC%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0F172A;
+    --bg-2: #121B30;
+    --card: #1B2336;
+    --line: #334155;
+    --line-2: #475569;
+    --text: #F8FAFC;
+    --muted: #94A3B8;
+    --dim: #64748B;
+    --accent: #22C55E;
+    --accent-dim: #166534;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --nav-h: 58px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line-2); border: 2px solid var(--bg); }
+  * { scrollbar-width: thin; scrollbar-color: var(--line-2) var(--bg); }
+
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6; font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono, pre, code { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 640px) { .wrap { padding: 0 32px; } }
+
+  .section { padding: 84px 0; scroll-margin-top: var(--nav-h); border-top: 1px solid var(--line); }
+  .section-title { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+  .lede { color: var(--muted); max-width: 60ch; margin-top: 16px; }
+
+  /* nav */
+  .site-nav { position: sticky; top: 0; z-index: 50; height: var(--nav-h); background: var(--bg); border-bottom: 1px solid var(--line); display: flex; align-items: center; }
+  .site-nav .wrap { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 20px; }
+  .brand { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 9px; }
+  .brand .prompt { color: var(--dim); }
+  .nav-links { display: none; align-items: center; gap: 22px; list-style: none; }
+  .nav-links a { font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: var(--muted); transition: color .15s; }
+  .nav-links a:hover { color: var(--accent); }
+  @media (min-width: 1024px) { .nav-links { display: flex; } }
+  .nav-cta {
+    font-family: "JetBrains Mono", monospace; font-size: 12.5px; font-weight: 600;
+    color: var(--accent); border: 1px solid var(--accent); padding: 7px 14px;
+    transition: background .15s, color .15s; white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--accent); color: var(--bg); }
+  .nav-cta:active { transform: translateY(1px); }
+
+  /* hero */
+  .hero { min-height: calc(100dvh - var(--nav-h)); display: flex; align-items: center; padding: 72px 0; }
+  .hero-grid { display: grid; gap: 48px; align-items: center; width: 100%; }
+  @media (min-width: 960px) { .hero-grid { grid-template-columns: 1fr 1fr; gap: 56px; } }
+  .hero-code { font-family: "JetBrains Mono", monospace; font-size: 13px; line-height: 1.9; color: var(--muted); overflow-x: auto; }
+  .hero-name { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin-top: 20px; }
+  .hero-name .amp { color: var(--accent); }
+  .hero-role { font-family: "JetBrains Mono", monospace; font-size: 13.5px; color: var(--accent); margin-top: 16px; }
+  .hero-sub { color: var(--muted); max-width: 44ch; margin-top: 18px; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .btn { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 600; padding: 11px 20px; border: 1px solid var(--line-2); color: var(--text); background: transparent; transition: all .15s; white-space: nowrap; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .btn-primary:hover { background: #2ED470; color: var(--bg); }
+
+  .terminal {
+    background: var(--bg-2); border: 1px solid var(--line-2); padding: 22px;
+    font-family: "JetBrains Mono", monospace; font-size: 13px; line-height: 2;
+  }
+  .terminal .bar { display: flex; gap: 7px; margin-bottom: 16px; }
+  .terminal .bar i { width: 11px; height: 11px; border-radius: 50%; display: block; background: var(--line-2); }
+  .terminal .bar i:first-child { background: #E2574C; }
+  .terminal .bar i:nth-child(2) { background: #D8A24A; }
+  .terminal .bar i:nth-child(3) { background: #57A26A; }
+  .terminal .cmd { color: var(--text); font-weight: 600; }
+  .terminal .prompt { color: var(--accent); }
+  .terminal .out { color: var(--muted); }
+  .terminal .out a { color: var(--accent); }
+  .terminal .out a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* profile */
+  .profile-grid { display: grid; gap: 48px; margin-top: 36px; }
+  @media (min-width: 960px) { .profile-grid { grid-template-columns: 3fr 2fr; gap: 64px; } }
+  .profile-grid p + p { margin-top: 16px; }
+  .profile-grid .body { color: var(--muted); max-width: 62ch; }
+  .profile-grid .body strong { color: var(--text); }
+  .stat { font-family: "JetBrains Mono", monospace; font-size: 13px; }
+  .stat li { display: flex; gap: 10px; padding: 12px 0; border-bottom: 1px dashed var(--line); color: var(--muted); }
+  .stat li:first-child { border-top: 1px dashed var(--line); }
+  .stat .k { color: var(--accent); }
+
+  /* expertise */
+  .ex-list { margin-top: 36px; }
+  .ex-row { display: grid; gap: 10px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .ex-row:first-child { border-top: 1px solid var(--line); }
+  @media (min-width: 860px) { .ex-row { grid-template-columns: 220px 1fr; gap: 32px; } }
+  .ex-name { font-family: "JetBrains Mono", monospace; font-size: 14px; font-weight: 600; color: var(--accent); }
+  .ex-row p { color: var(--muted); font-size: 0.97rem; max-width: 64ch; }
+  .ex-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag { font-family: "JetBrains Mono", monospace; font-size: 11.5px; color: var(--muted); border: 1px solid var(--line-2); padding: 4px 10px; }
+  .tag:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* experience */
+  .tl { margin-top: 40px; }
+  .tl-item { display: grid; gap: 8px; padding: 30px 0 30px 18px; border-bottom: 1px solid var(--line); position: relative; }
+  .tl-item:first-child { border-top: 1px solid var(--line); }
+  .tl-item::before { content: ""; position: absolute; left: 0; top: 38px; width: 8px; height: 8px; background: var(--accent); }
+  .tl-period { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--dim); }
+  .tl-role { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.01em; }
+  .tl-co { font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: var(--accent); margin-top: 2px; }
+  .tl-summary { color: var(--muted); font-size: 0.97rem; max-width: 70ch; margin-top: 10px; }
+  .tl-projects { margin-top: 14px; display: grid; gap: 10px; }
+  .tl-projects li { list-style: none; border-left: 2px solid var(--line-2); padding-left: 14px; }
+  .tl-projects .pn { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 600; }
+  .tl-projects .pd { color: var(--muted); font-size: 0.92rem; margin-top: 3px; max-width: 66ch; }
+  .tl-item.archived .tl-role { color: var(--muted); font-size: 1.05rem; }
+
+  /* community / education */
+  .two-col { display: grid; gap: 16px; margin-top: 36px; }
+  @media (min-width: 860px) { .two-col { grid-template-columns: 1fr 1fr; gap: 24px; } }
+  .panel { border: 1px solid var(--line-2); padding: 24px; }
+  .panel h3 { font-family: "JetBrains Mono", monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 16px; }
+  .panel ul { list-style: none; }
+  .panel li { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--line); color: var(--muted); font-size: 0.95rem; }
+  .panel li:last-child { border-bottom: none; }
+  .panel li::before { content: "»"; color: var(--accent); }
+  .panel li .y { margin-left: auto; font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--dim); }
+
+  .edu-list li { font-size: 0.95rem; }
+  .edu-list .ey { font-family: "JetBrains Mono", monospace; color: var(--accent); font-size: 12.5px; }
+  .edu-list span.dim { display: block; font-size: 0.85rem; color: var(--dim); }
+
+  /* references */
+  .refs { margin-top: 36px; display: grid; gap: 0; }
+  .ref { border-bottom: 1px solid var(--line); padding: 28px 0; display: grid; gap: 16px; }
+  @media (min-width: 860px) { .ref { grid-template-columns: 1fr 260px; gap: 32px; align-items: start; } }
+  .ref blockquote { color: var(--muted); font-size: 1rem; line-height: 1.6; }
+  .ref blockquote .gt { color: var(--accent); font-family: "JetBrains Mono", monospace; font-weight: 700; }
+  .ref figcaption { text-align: left; }
+  .ref figcaption .n { font-weight: 600; font-size: 0.95rem; }
+  .ref figcaption span { display: block; color: var(--dim); font-size: 0.85rem; margin-top: 2px; }
+
+  /* contact */
+  .contact { border-bottom: 1px solid var(--line); }
+  .contact-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .contact-links { margin-top: 36px; max-width: 560px; }
+  .contact-links a { display: flex; align-items: center; gap: 14px; padding: 16px 4px; border-bottom: 1px solid var(--line); font-size: 0.98rem; transition: color .15s, border-color .15s; }
+  .contact-links a:hover { color: var(--accent); border-color: var(--accent); }
+  .contact-links svg { color: var(--accent); flex-shrink: 0; }
+  .contact-links .lbl { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; min-width: 70px; }
+
+  footer { padding: 30px 0 40px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
+  footer p { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--dim); }
+  .to-top { font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: var(--muted); }
+  .to-top:hover { color: var(--accent); }
+
+  [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease), transform .6s var(--ease); transition-delay: var(--d, 0s); }
+  [data-reveal].in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="prompt">$&nbsp;</span>~/fcalle</a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#profile">profile</a></li>
+        <li><a href="#expertise">expertise</a></li>
+        <li><a href="#experience">experience</a></li>
+        <li><a href="#education">education</a></li>
+        <li><a href="#references">references</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#contact">./contact</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div data-reveal>
+        <p class="hero-role">Software Architect &middot; AI Engineer</p>
+        <h1 class="hero-name">Francisco <span class="amp">Calle</span> Moreno</h1>
+        <p class="hero-sub">I design cloud-native platforms and AI-driven products, taking them from architecture to production.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#contact">get_in_touch()</a>
+          <a class="btn" href="#experience">view_experience()</a>
+        </div>
+      </div>
+      <div class="terminal" data-reveal style="--d:.1s" role="presentation">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div><span class="prompt">$</span> <span class="cmd">whoami</span></div>
+        <div class="out">Francisco Calle Moreno — Software Architect &amp; AI Engineer</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">$</span> <span class="cmd">cat current_role</span></div>
+        <div class="out">Software Architect · AI Innovation Lead — Optiva Media / EPAM</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">$</span> <span class="cmd">echo $FOCUS</span></div>
+        <div class="out">AI transformation · MCP · cloud-native · clean architecture</div>
+        <div>&nbsp;</div>
+        <div><span class="prompt">$</span> <span class="cmd">./contact --any</span></div>
+        <div class="out"><a href="mailto:francisco.calle.moreno@gmail.com">francisco.calle.moreno@gmail.com</a> · <a href="https://es.linkedin.com/in/fcallem77">in/fcallem77</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="profile">
+    <div class="wrap">
+      <h2 class="section-title" data-reveal>Engineer, architect, and lifelong learner.</h2>
+      <div class="profile-grid">
+        <div data-reveal style="--d:.06s">
+          <p class="body">I am a software engineer who stays current with emerging technologies and frameworks. For me, learning is a habit, not a phase: whether it is technical, product-focused, or managerial, knowledge never goes to waste.</p>
+          <p class="body">I am looking for a role with an international perspective, centered on architecture and product development, where I can grow together with the product, mentor teams, and expand beyond the purely technical toward team management and product ownership.</p>
+          <p class="body">I have the blessing of working on my hobby. Software ideation, design, and development are what I do for a living, and what I would do anyway.</p>
+        </div>
+        <ul class="stat" data-reveal style="--d:.12s">
+          <li><span class="k">role</span><span>Software architect &amp; full-stack developer, Optiva Media / EPAM</span></li>
+          <li><span class="k">lead</span><span>AI-based PoCs and internal product development</span></li>
+          <li><span class="k">team</span><span>Tech lead and AI standards owner, up to ten engineers</span></li>
+          <li><span class="k">growth</span><span>Resource manager, guiding new joiners</span></li>
+          <li><span class="k">status</span><span>Open to opportunities</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="expertise" style="background: var(--bg-2);">
+    <div class="wrap">
+      <h2 class="section-title" data-reveal>What I work on.</h2>
+      <div class="ex-list">
+        <article class="ex-row" data-reveal>
+          <h3 class="ex-name">ai/transformation</h3>
+          <div>
+            <p>I design the patterns and set the standards for AI adoption: MCP integrations, LLM fine-tuning, RAG systems, intelligent automation, and agent orchestration. Hands-on from research to production-ready, productizable solutions.</p>
+            <div class="ex-tags"><span class="tag">MCP</span><span class="tag">Agents</span><span class="tag">RAG</span><span class="tag">LLM fine-tuning</span><span class="tag">SDD</span></div>
+          </div>
+        </article>
+        <article class="ex-row" data-reveal>
+          <h3 class="ex-name">leadership</h3>
+          <div>
+            <p>Team management, mentoring, resource planning, and product ownership. I lead technical teams while staying fully hands-on.</p>
+            <div class="ex-tags"><span class="tag">Tech lead</span><span class="tag">Mentoring</span><span class="tag">Resource manager</span></div>
+          </div>
+        </article>
+        <article class="ex-row" data-reveal>
+          <h3 class="ex-name">frontend</h3>
+          <div>
+            <p>UI/UX design and development. Interfaces as considered as the systems behind them.</p>
+            <div class="ex-tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">UI design</span></div>
+          </div>
+        </article>
+        <article class="ex-row" data-reveal>
+          <h3 class="ex-name">backend</h3>
+          <div>
+            <p>Scalable services and microservices across the stack.</p>
+            <div class="ex-tags"><span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">Java 18</span><span class="tag">NestJS</span><span class="tag">FastAPI</span><span class="tag">Spring Boot</span></div>
+          </div>
+        </article>
+        <article class="ex-row" data-reveal>
+          <h3 class="ex-name">cloud/devops</h3>
+          <div>
+            <p>Infrastructure as code, containerized services, and serverless patterns on AWS and beyond.</p>
+            <div class="ex-tags"><span class="tag">AWS</span><span class="tag">AWS CDK</span><span class="tag">Docker</span><span class="tag">Terraform</span><span class="tag">GitHub Actions</span><span class="tag">Vercel</span><span class="tag">Supabase</span></div>
+          </div>
+        </article>
+        <article class="ex-row" data-reveal>
+          <h3 class="ex-name">architecture</h3>
+          <div>
+            <p>Clean code, clean architecture, and domain-driven design. I care about the seams and boundaries that keep systems evolvable.</p>
+            <div class="ex-tags"><span class="tag">Clean code</span><span class="tag">Clean architecture</span><span class="tag">DDD</span><span class="tag">Hexagonal</span><span class="tag">Event-driven</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="wrap">
+      <h2 class="section-title" data-reveal>Two decades of shipping software.</h2>
+      <div class="tl">
+        <article class="tl-item" data-reveal>
+          <p class="tl-period">2022-11 &rarr; now</p>
+          <h3 class="tl-role">Software Architect · AI Innovation Lead</h3>
+          <p class="tl-co">Optiva Media / EPAM</p>
+          <p class="tl-summary">Software architect, full-stack developer, and AI researcher. I design and build cloud-native platforms and AI-driven products, coordinate the internal PoC community, support project management and clients, and act as resource manager for new joiners.</p>
+          <ul class="tl-projects">
+            <li>
+              <p class="pn">MCP Gateway</p>
+              <p class="pd">Architecture and full-stack development of a cloud-native platform for a global sportswear retailer, focused on Model Context Protocol integrations, using AWS, TypeScript, Python, and Docker.</p>
+            </li>
+            <li>
+              <p class="pn">AI-based PoCs and internal products</p>
+              <p class="pd">Led the design and implementation of LLM-based proofs of concept and internal products with commercial potential: RAG systems, intelligent automation, and agent architectures. Tech lead and AI standards owner for a team of up to ten engineers.</p>
+            </li>
+            <li>
+              <p class="pn">Retailer shop automation</p>
+              <p class="pd">Tech lead and architect for a modular monolith integrating warehouse automation, built on an event-driven architecture with Java 18, Spring Boot, and Kafka. Supervised production rollout across two retail locations and a demo site.</p>
+            </li>
+            <li>
+              <p class="pn">Platform services</p>
+              <p class="pd">Claims microservices, a global API gateway migration, a high-throughput image scaling service (up to 400k requests in short windows), a RAG onboarding platform, and automated media feedback analysis with AI face blurring.</p>
+            </li>
+          </ul>
+        </article>
+        <article class="tl-item" data-reveal>
+          <p class="tl-period">2022-03 &rarr; 2022-11</p>
+          <h3 class="tl-role">Senior Software Engineer</h3>
+          <p class="tl-co">Valasis / Savi</p>
+          <p class="tl-summary">Frontend ownership of a legacy application: refactoring legacy functionality, redesigning screens and UX, growing the test base, and feeding product improvements back to the product team. Node.js on AWS.</p>
+        </article>
+        <article class="tl-item" data-reveal>
+          <p class="tl-period">2015-12 &rarr; 2022-03</p>
+          <h3 class="tl-role">Software Architect</h3>
+          <p class="tl-co">Beeva / BBVA Next Technologies</p>
+          <p class="tl-summary">Frontend and backend software architect across multiple products: Themis (frontend architecture, React/Meteor), Clever (backend API and messaging), AIT Studio (UI R&amp;D, Polymer), and OpenWeb, a long-running platform refactored to a service-based architecture on AWS with a migration to TypeScript.</p>
+        </article>
+        <article class="tl-item" data-reveal>
+          <p class="tl-period">2010-06 &rarr; 2015-12</p>
+          <h3 class="tl-role">Software Architect / Developer / Technical Advisor</h3>
+          <p class="tl-co">Atos (Atos Research &amp; Innovation)</p>
+          <p class="tl-summary">Architecture, development, and technical advisory on European Commission research projects including uService, BIVEE, iCORE, FIspace, and FITMAN. Also corporate analyst on the BBVA SLA project.</p>
+        </article>
+        <article class="tl-item archived" data-reveal>
+          <p class="tl-period">2000 &rarr; 2010</p>
+          <h3 class="tl-role">Earlier career: senior developer to corporate analyst</h3>
+          <p class="tl-summary">Across Coritel, Atos Origin, Southern Star, Wairbut, Same, and Glokal Consulting: Java and SOA development for banking (Barclays, BBVA), retail (Carrefour, DIA), telecom (Vodafone), and public sector (Ministry of Justice, HP), progressing from senior developer to corporate analyst.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="community" style="background: var(--bg-2);">
+    <div class="wrap">
+      <h2 class="section-title" data-reveal>Beyond the code.</h2>
+      <div class="two-col">
+        <div class="panel" data-reveal>
+          <h3>Talks &amp; meetups</h3>
+          <ul>
+            <li><span>Meteor evangelist and co-organizer of the Meteor Spain Meetup community</span></li>
+            <li><span>First Meteor Spain Meetup, URJC Fuenlabrada</span><span class="y">2014</span></li>
+            <li><span>Rapid prototyping with Meteor, WeNode Barcelona</span><span class="y">2014</span></li>
+          </ul>
+        </div>
+        <div class="panel" data-reveal style="--d:.06s">
+          <h3>Local groups</h3>
+          <ul>
+            <li><span>Madrid JS</span></li>
+            <li><span>IoT Madrid</span></li>
+            <li><span>HTML5 Spain</span></li>
+          </ul>
+        </div>
+        <div class="panel" data-reveal>
+          <h3>Languages</h3>
+          <ul>
+            <li><span>Spanish, native</span></li>
+            <li><span>English, C1</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="wrap">
+      <h2 class="section-title" data-reveal>Always learning.</h2>
+      <div class="two-col">
+        <div class="panel" data-reveal>
+          <h3>AI, cloud &amp; engineering</h3>
+          <ul class="edu-list">
+            <li><span class="ey">2025</span><span>LLM Fine-Tuning <span class="dim">· EPAM</span></span></li>
+            <li><span class="ey">2024</span><span>GenAI Solutions, Development Bootcamp <span class="dim">· EPAM</span></span></li>
+            <li><span class="ey">2024</span><span>Resource Manager Basics <span class="dim">· EPAM</span></span></li>
+            <li><span class="ey">2023</span><span>AWS Workshop: Serverless Patterns <span class="dim">· EPAM</span></span></li>
+            <li><span class="ey">2017</span><span>AWS Certified Solutions Developer, Associate <span class="dim">· Udemy</span></span></li>
+            <li><span class="ey">2016-17</span><span>React, Redux, Angular, and Vue.js guides <span class="dim">· Udemy</span></span></li>
+          </ul>
+        </div>
+        <div class="panel" data-reveal style="--d:.06s">
+          <h3>Foundations</h3>
+          <ul class="edu-list">
+            <li><span class="ey">2014</span><span>M101P: MongoDB for Node.js Developers <span class="dim">· MongoDB University</span></span></li>
+            <li><span class="ey">2011</span><span>Making the Switch to Drupal 7 <span class="dim">· DrupalCon London</span></span></li>
+            <li><span class="ey">2008</span><span>SOA &amp; Web Services <span class="dim">· Atos Origin</span></span></li>
+            <li><span class="ey">2006</span><span>UML with Rational Rose <span class="dim">· Atos Origin</span></span></li>
+            <li><span class="ey">2004</span><span>Enterprise JavaBeans: Design &amp; Deploy <span class="dim">· Coritel</span></span></li>
+            <li><span class="ey">2002</span><span>Distributed Java Programming <span class="dim">· Sun Microsystems, Madrid</span></span></li>
+            <li><span class="ey">1998-00</span><span>V.T. in Application Development <span class="dim">· IES Jovellanos, Fuenlabrada</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="references" style="background: var(--bg-2);">
+    <div class="wrap">
+      <h2 class="section-title" data-reveal>What colleagues say.</h2>
+      <div class="refs">
+        <figure class="ref" data-reveal>
+          <blockquote><span class="gt">&gt;</span> There is no environment, language, or technology that Francisco does not know, and if there is something he does not know, his voracious curiosity will turn him into an expert in a short period of time. I have worked with many professionals, but none of the extreme value of Francisco Calle.</blockquote>
+          <figcaption><p class="n">Carlos Ca&ntilde;ado Moya</p><span>Head of Innovation &amp; Software Development</span></figcaption>
+        </figure>
+        <figure class="ref" data-reveal>
+          <blockquote><span class="gt">&gt;</span> Francisco is a very focused and smart web architect. He has done great work, not only from the technical point of view, but also from the business and perspective one.</blockquote>
+          <figcaption><p class="n">Massimo Canducci</p><span>Innovation Director, Engineering Ingegneria Informatica</span></figcaption>
+        </figure>
+        <figure class="ref" data-reveal>
+          <blockquote><span class="gt">&gt;</span> Francisco has a beautiful analytical mind, matched with a boundless enthusiasm for his work. When the unexpected strikes, he is a first-line responder who will not give up until the problem is solved. I would work with him again without hesitation.</blockquote>
+          <figcaption><p class="n">Jorge Pereira Carlos</p><span>Project Manager, Atos Research &amp; Innovation</span></figcaption>
+        </figure>
+        <figure class="ref" data-reveal>
+          <blockquote><span class="gt">&gt;</span> Francisco has a high professional level within the areas he manages, and a high level of commitment to the projects he participates in, even beyond his assigned tasks. He relates well with his colleagues.</blockquote>
+          <figcaption><p class="n">Julio Pastur</p><span>Project Manager, Hewlett Packard</span></figcaption>
+        </figure>
+        <figure class="ref" data-reveal>
+          <blockquote><span class="gt">&gt;</span> A thorough professional who far exceeds expectations in every way, both technically and personally. Self-sufficient, quickly productive, with fast development and good quality. Very proactive, with excellent commitment and involvement.</blockquote>
+          <figcaption><p class="n">Fernando Bardal Otero</p><span>Technical Manager, Hewlett Packard</span></figcaption>
+        </figure>
+        <figure class="ref" data-reveal>
+          <blockquote><span class="gt">&gt;</span> Francisco has worked with great determination and commitment. He stands as a natural leader given his expertise and his ability to investigate and always provide innovative solutions. A hard worker, self-taught, always up to date, and generous in sharing knowledge with his peers.</blockquote>
+          <figcaption><p class="n">Vicente Povedano</p><span>Energy Distribution Systems Manager, Atos Origin</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <div class="wrap">
+      <h2 class="contact-title" data-reveal>Let&rsquo;s build something together.</h2>
+      <p class="lede" data-reveal style="--d:.06s">Architecture, AI, product design, or just a good conversation about software. I would love to hear from you.</p>
+      <div class="contact-links" data-reveal style="--d:.1s">
+        <a href="mailto:francisco.calle.moreno@gmail.com">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg>
+          <span class="lbl">email</span><span>francisco.calle.moreno@gmail.com</span>
+        </a>
+        <a href="https://es.linkedin.com/in/fcallem77" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v1.5A6 6 0 0 1 16 8z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          <span class="lbl">linkedin</span><span>in/fcallem77</span>
+        </a>
+        <a href="tel:+34626907536">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span class="lbl">phone</span><span>+34 626 90 75 36</span>
+        </a>
+        <a href="https://es.linkedin.com/in/fcallem77" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span class="lbl">based</span><span>Madrid, Spain</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; 2026 Francisco Calle Moreno</p>
+    <a class="to-top" href="#top">cd ~ &amp;&amp; back_to_top()</a>
+  </div>
+</footer>
+
+<script>
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add("in"); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll("[data-reveal]").forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll("[data-reveal]").forEach(function (el) { el.classList.add("in"); });
+  }
+</script>
+</body>
+</html>
