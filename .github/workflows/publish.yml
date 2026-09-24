@@ -25,8 +25,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/bitIO/static-page-about:${{ github.ref_name }}
-            ghcr.io/bitIO/static-page-about:latest
+            ghcr.io/bitio/static-page-about:${{ github.ref_name }}
+            ghcr.io/bitio/static-page-about:latest
       - name: Make package public (best-effort; needs org admin on first run)
         run: gh api --method PATCH /orgs/bitIO/packages/container/static-page-about -f visibility=public
         continue-on-error: true
