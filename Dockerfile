@@ -1,4 +1,4 @@
-FROM nginx:alpine@sha256:72ba65eb42c10344912a84ff42408db7d34f2feb642204570ab8fc5ffd29f1d3
+FROM nginx:alpine@sha256:713fc2ebfd92e8217db451477182ee91944b123d2b1ee9fd5a8c6e91ca6c3a11
 
 COPY index.html /usr/share/nginx/html/
 COPY index-brutalist.html /usr/share/nginx/html/
